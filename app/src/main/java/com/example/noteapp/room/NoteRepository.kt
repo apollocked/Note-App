@@ -1,6 +1,6 @@
-package com.example.myapplication.room
+package com.example.noteapp.room
 
-class NoteRepository (private val noteDao: NoteDao) {
+class NoteRepository(private val noteDao: NoteDao) {
     val allNotes = noteDao.getAllNotes()
 
     suspend fun insert(note: Note) {
@@ -10,9 +10,8 @@ class NoteRepository (private val noteDao: NoteDao) {
     suspend fun update(note: Note) {
         noteDao.update(note)
     }
+
     suspend fun delete(note: Note) {
         noteDao.delete(note)
     }
-
-
-    }
+}

@@ -1,4 +1,4 @@
-package com.example.myapplication.room
+package com.example.noteapp.room
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -7,26 +7,25 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class NoteViewModel (application: Application) : AndroidViewModel(application){
-    val allNotes : LiveData<MutableList<Note>>
-    private val repository : NoteRepository
+class NoteViewModel(application: Application) : AndroidViewModel(application) {
+    val allNotes: LiveData<MutableList<Note>>
+    private val repository: NoteRepository
 
-init {
-    val dao = NoteDatabase.getInstanse(application).getNoteDao()
-    repository = NoteRepository(dao)
-    allNotes = repository.allNotes
-}
-fun deleteNote(note: Note) = viewModelScope.launch(Dispatchers.IO) {
-    repository.delete(note)
+    init {
+        val dao = NoteDatabase.getInstanse(application).getNoteDao()
+        repository = NoteRepository(dao)
+        allNotes = repository.allNotes
+    }
 
-}
+    fun deleteNote(note: Note) = viewModelScope.launch(Dispatchers.IO) {
+        repository.delete(note)
+    }
 
     fun updateNote(note: Note) = viewModelScope.launch(Dispatchers.IO) {
         repository.update(note)
     }
+
     fun addNote(note: Note) = viewModelScope.launch(Dispatchers.IO) {
         repository.insert(note)
     }
-
-
 }

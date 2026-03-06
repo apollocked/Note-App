@@ -1,25 +1,24 @@
 package com.example.noteapp.adaptors
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.room.Note
 import com.example.noteapp.R
+import com.example.noteapp.room.Note
 
-class NoteAdaptor()
-    : RecyclerView.Adapter<NoteAdaptor.NoteViewHolder>() {
-private var notesList : MutableList<Note> = mutableListOf()
+class NoteAdaptor : RecyclerView.Adapter<NoteAdaptor.NoteViewHolder>() {
+    private var notesList: MutableList<Note> = mutableListOf()
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): NoteViewHolder {
-return NoteViewHolder(
-    LayoutInflater.from(parent.context)
-        .inflate(R.layout.note_item,parent,false))
+        return NoteViewHolder(
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.note_item, parent, false)
+        )
     }
 
     override fun onBindViewHolder(
@@ -32,19 +31,16 @@ return NoteViewHolder(
         holder.textViewPriority.text = note.priority.toString()
     }
 
-
     override fun getItemCount(): Int = notesList.size
 
     fun setNotes(notes: MutableList<Note>) {
         this.notesList = notes
+        notifyDataSetChanged()
     }
 
     inner class NoteViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val textViewTitle = view.findViewById<TextView>(R.id.text_view_title)
         val textViewDescription = view.findViewById<TextView>(R.id.text_view_description)
-         val textViewPriority = view.findViewById<TextView>(R.id.text_view_priority)
-
+        val textViewPriority = view.findViewById<TextView>(R.id.text_view_priority)
     }
-
-
 }

@@ -1,4 +1,4 @@
-package com.example.myapplication.room
+package com.example.noteapp.room
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -7,8 +7,7 @@ import androidx.room.PrimaryKey
 data class Note(
     val title: String,
     val description: String,
-    val priority: Int
-) {
+    val priority: Int,
     @PrimaryKey(autoGenerate = true)
-    val id = 0
-}
+    val id: Int = 0
+)

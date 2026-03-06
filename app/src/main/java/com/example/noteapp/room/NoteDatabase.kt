@@ -1,11 +1,11 @@
-package com.example.myapplication.room
+package com.example.noteapp.room
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = arrayOf(Note::class), version = 1, exportSchema = false)
+@Database(entities = [Note::class], version = 1, exportSchema = false)
 abstract class NoteDatabase : RoomDatabase() {
     abstract fun getNoteDao(): NoteDao
 
@@ -13,8 +13,6 @@ abstract class NoteDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: NoteDatabase? = null
         fun getInstanse(context: Context): NoteDatabase {
-            // if the INSTANCE is not null, then return it,
-            // if it is, then create the database
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
@@ -22,14 +20,8 @@ abstract class NoteDatabase : RoomDatabase() {
                     "note_database"
                 ).build()
                 INSTANCE = instance
-                // return instance
                 instance
-
             }
         }
-
-
     }
-
-
 }
