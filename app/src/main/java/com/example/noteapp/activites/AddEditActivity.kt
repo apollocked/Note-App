@@ -1,6 +1,8 @@
 package com.example.noteapp.activites
 
-import android.content.Intent
+ import androidx.core.view.ViewCompat
+ import androidx.core.view.WindowInsetsCompat
+ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -21,12 +23,22 @@ class AddEditActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_add_edit)
+        // Import these at the top:
+
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            // This adds the height of the status bar/action bar as padding to your layout
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
         editTextTitle = findViewById(R.id.edit_text_title)
         editTextDescription = findViewById(R.id.edit_text_description)
         numberPickerPriority = findViewById(R.id.number_picker_priority)
         numberPickerPriority.minValue = 1
         numberPickerPriority.maxValue = 10
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_close)
         title = "Add Note"
 

@@ -9,5 +9,5 @@ data class Note(
     val description: String,
     val priority: Int,
     @PrimaryKey(autoGenerate = true)
-    val id: Int = 0
+    var id: Int = 0
 )

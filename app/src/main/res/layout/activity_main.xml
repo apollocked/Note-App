@@ -11,8 +11,6 @@
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="72dp"
-        tools:layout_editor_absoluteY="-337dp"
         tools:listitem="@layout/note_item" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -21,6 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="32dp"
+        android:contentDescription="@string/add_icon"
         android:src="@drawable/ic_add"
         app:shapeAppearance="@style/Widget.Material3.CircularProgressIndicator.Small" />
 
