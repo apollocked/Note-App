@@ -1,8 +1,6 @@
 package com.example.noteapp.activites
 
- import androidx.core.view.ViewCompat
- import androidx.core.view.WindowInsetsCompat
- import android.content.Intent
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -11,6 +9,8 @@ import android.widget.NumberPicker
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import com.example.noteapp.R
 import com.example.noteapp.utils.Constants
 
@@ -40,7 +40,15 @@ class AddEditActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_close)
-        title = "Add Note"
+        if (intent.hasExtra(Constants.EXTRA_ID)) {
+            title = "Edit Note"
+            editTextTitle.setText(intent.getStringExtra(Constants.EXTRA_TITLE))
+            editTextDescription.setText(intent.getStringExtra(Constants.EXTRA_DESCRIPTION))
+            numberPickerPriority.value = intent.getIntExtra(Constants.EXTRA_PRIORITY, -1)
+
+        } else {
+            title = "Add Note"
+        }
 
     }
 
@@ -61,12 +69,22 @@ class AddEditActivity : AppCompatActivity() {
             ).show()
             return
         }
+        val id = intent.getIntExtra(Constants.EXTRA_ID, -1)
+        if (id != -1) {
+            setResult(Constants.EDIT_REQUEST_CODE, Intent().apply {
+                putExtra(Constants.EXTRA_TITLE, title)
+                putExtra(Constants.EXTRA_DESCRIPTION, description)
+                putExtra(Constants.EXTRA_PRIORITY, priority)
+                putExtra(Constants.EXTRA_ID, id)
+            })
+        } else {
 
-        setResult(Constants.REQUEST_CODE, Intent().apply {
-            putExtra(Constants.EXTRA_TITLE, title)
-            putExtra(Constants.EXTRA_DESCRIPTION, description)
-            putExtra(Constants.EXTRA_PRIORITY, priority)
-        })
+            setResult(Constants.REQUEST_CODE, Intent().apply {
+                putExtra(Constants.EXTRA_TITLE, title)
+                putExtra(Constants.EXTRA_DESCRIPTION, description)
+                putExtra(Constants.EXTRA_PRIORITY, priority)
+            })
+        }
         finish()
     }
 

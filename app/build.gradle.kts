@@ -47,6 +47,7 @@ dependencies {
     // Lifecycle
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.androidx.ui)
 
     // Room Database
     val room_version = "2.7.0-alpha01" // Current stable/preview for 2026
