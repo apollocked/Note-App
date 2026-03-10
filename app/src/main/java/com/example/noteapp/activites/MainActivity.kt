@@ -11,34 +11,35 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.noteapp.R
 import com.example.noteapp.adaptors.NoteAdaptor
+import com.example.noteapp.databinding.ActivityMainBinding
 import com.example.noteapp.room.Note
 import com.example.noteapp.room.NoteViewModel
 import com.example.noteapp.utils.Constants
-import com.google.android.material.appbar.MaterialToolbar
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity(), NoteAdaptor.OnClickListener {
     private lateinit var noteViewModel: NoteViewModel
     private val notesAdaptor = NoteAdaptor(this)
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var addNoteButton: FloatingActionButton
-    private lateinit var getResults: ActivityResultLauncher<Intent>
 
+
+    private lateinit var getResults: ActivityResultLauncher<Intent>
+    private lateinit var mBinding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        val toolbar: MaterialToolbar = findViewById(R.id.toolbar)
-        setSupportActionBar(toolbar)
+
+
+        setSupportActionBar(mBinding.toolbar)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -46,10 +47,10 @@ class MainActivity : AppCompatActivity(), NoteAdaptor.OnClickListener {
             insets
         }
 
-        addNoteButton = findViewById(R.id.add_note_button)
-        recyclerView = findViewById(R.id.recycler_view)
-        recyclerView.adapter = notesAdaptor
-        recyclerView.layoutManager = LinearLayoutManager(this)
+
+
+        mBinding.recyclerView.adapter = notesAdaptor
+       mBinding.recyclerView.layoutManager = LinearLayoutManager(this)
         noteViewModel = ViewModelProvider(
             this,
             ViewModelProvider.AndroidViewModelFactory(application)
@@ -84,7 +85,7 @@ class MainActivity : AppCompatActivity(), NoteAdaptor.OnClickListener {
                 }
 
             }
-        addNoteButton.setOnClickListener {
+       mBinding.addNoteButton.setOnClickListener {
             val intent = Intent(this, AddEditActivity::class.java)
             getResults.launch(intent)
         }
@@ -106,12 +107,12 @@ class MainActivity : AppCompatActivity(), NoteAdaptor.OnClickListener {
             ) {
                 val removedNote = notesAdaptor.getNoteAt(viewHolder.adapterPosition)
                 noteViewModel.deleteNote(removedNote)
-                Snackbar.make(recyclerView, "Note deleted", Snackbar.LENGTH_LONG)
+                Snackbar.make(mBinding.recyclerView, "Note deleted", Snackbar.LENGTH_LONG)
                     .setAction("Undo") {
                         noteViewModel.addNote(removedNote)
                     }.show()
             }
-        }).attachToRecyclerView(recyclerView)
+        }).attachToRecyclerView(mBinding.recyclerView)
 
     }
 
@@ -127,6 +128,7 @@ class MainActivity : AppCompatActivity(), NoteAdaptor.OnClickListener {
                 Toast.makeText(this, "All notes deleted", Toast.LENGTH_SHORT).show()
                 true
             }
+
             else -> super.onOptionsItemSelected(item)
         }
     }
