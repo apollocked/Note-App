@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.noteapp.R
 import com.example.noteapp.room.Note
 
-class NoteAdaptor(val listener: OnClickListener) :
+class NoteAdaptor(private val listener: OnClickListener) :
     ListAdapter<Note, NoteAdaptor.NoteViewHolder>(DIFF_CALLBACK) {
 
     companion object {
@@ -21,9 +21,7 @@ class NoteAdaptor(val listener: OnClickListener) :
             }
 
             override fun areContentsTheSame(oldNote: Note, newNote: Note): Boolean {
-                return oldNote.title == newNote.title &&
-                        oldNote.description == newNote.description &&
-                        oldNote.priority == newNote.priority
+                return oldNote == newNote
             }
         }
     }
@@ -35,30 +33,16 @@ class NoteAdaptor(val listener: OnClickListener) :
     }
 
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
-        val note = getItem(position)
-        holder.textViewTitle.text = note.title
-        holder.textViewDescription.text = note.description
-        holder.textViewPriority.text = note.priority.toString()
-
-        val priorityColor = when (note.priority) {
-            in 1..3 -> R.color.priority_low
-            in 4..7 -> R.color.priority_medium
-            else -> R.color.priority_high
-        }
-        holder.priorityIndicator.setBackgroundColor(
-            ContextCompat.getColor(holder.itemView.context, priorityColor)
-        )
+        holder.bind(getItem(position))
     }
 
-    fun getNoteAt(position: Int): Note {
-        return getItem(position)
-    }
+    fun getNoteAt(position: Int): Note = getItem(position)
 
     inner class NoteViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val textViewTitle: TextView = view.findViewById(R.id.text_view_title)
-        val textViewDescription: TextView = view.findViewById(R.id.text_view_description)
-        val textViewPriority: TextView = view.findViewById(R.id.text_view_priority)
-        val priorityIndicator: View = view.findViewById(R.id.priority_indicator)
+        private val textViewTitle: TextView = view.findViewById(R.id.text_view_title)
+        private val textViewDescription: TextView = view.findViewById(R.id.text_view_description)
+        private val textViewPriority: TextView = view.findViewById(R.id.text_view_priority)
+        private val priorityIndicator: View = view.findViewById(R.id.priority_indicator)
 
         init {
             view.setOnClickListener {
@@ -67,6 +51,22 @@ class NoteAdaptor(val listener: OnClickListener) :
                     listener.onClickItem(getItem(position))
                 }
             }
+        }
+
+        fun bind(note: Note) {
+            textViewTitle.text = note.title
+            textViewDescription.text = note.description
+            
+            val (priorityText, colorRes) = when (note.priority) {
+                in 1..3 -> "Low" to R.color.priority_low
+                in 4..7 -> "Medium" to R.color.priority_medium
+                else -> "High" to R.color.priority_high
+            }
+
+            textViewPriority.text = priorityText
+            val color = ContextCompat.getColor(itemView.context, colorRes)
+            textViewPriority.setTextColor(color)
+            priorityIndicator.setBackgroundColor(color)
         }
     }
 

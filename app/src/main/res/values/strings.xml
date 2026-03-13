@@ -1,10 +1,23 @@
 <resources>
     <string name="app_name">Note App</string>
-    <string name="_1">1</string>
     <string name="title">Title</string>
     <string name="description">Description</string>
-    <string name="add_icon">add Icon</string>
+    <string name="add_icon">Add Icon</string>
     <string name="enter_title">Enter title</string>
     <string name="enter_description">Enter description</string>
-    <string name="priority">priority</string>
+    <string name="priority">Priority</string>
+    <string name="save_note">Save Note</string>
+    <string name="delete_all_notes">Delete all notes</string>
+    <string name="note_saved">Note saved</string>
+    <string name="note_updated">Note updated</string>
+    <string name="note_deleted">Note deleted</string>
+    <string name="undo">Undo</string>
+    <string name="all_notes_deleted">All notes deleted</string>
+    <string name="please_insert_title_and_description">Please insert a title and description</string>
+    <string name="edit_note">Edit Note</string>
+    <string name="add_note">Add Note</string>
+    <string name="no_notes_yet">No notes yet</string>
+    <string name="tap_to_create">Tap + to create your first note</string>
+    <string name="new_note">New Note</string>
+    <string name="choose_priority_value">Choose a value from 1 (low) to 10 (high)</string>
 </resources>

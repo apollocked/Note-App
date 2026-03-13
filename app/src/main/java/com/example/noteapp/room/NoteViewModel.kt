@@ -12,7 +12,7 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
     private val repository: NoteRepository
 
     init {
-        val dao = NoteDatabase.getInstanse(application).getNoteDao()
+        val dao = NoteDatabase.getInstance(application).getNoteDao()
         repository = NoteRepository(dao)
         allNotes = repository.allNotes
     }
@@ -28,6 +28,7 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
     fun addNote(note: Note) = viewModelScope.launch(Dispatchers.IO) {
         repository.insert(note)
     }
+
     fun deleteAllNotes() = viewModelScope.launch(Dispatchers.IO) {
         repository.deleteAllNotes()
     }
