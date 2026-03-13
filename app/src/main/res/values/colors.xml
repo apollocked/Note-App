@@ -1,19 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary_blue">#2196F3</color>
-    <color name="primary_variant">#1976D2</color>
-    <color name="secondary_color">#03DAC6</color>
-    <color name="accent_gold">#FFC107</color>
+    <!-- Brand -->
+    <color name="primary">#6C63FF</color>
+    <color name="primary_dark">#4B44CC</color>
+    <color name="primary_light">#EAE9FF</color>
+    <color name="secondary">#FF6584</color>
+    <color name="accent">#43E6C5</color>
+
+    <!-- Backwards-compat alias used by existing code -->
+    <color name="primary_blue">#6C63FF</color>
+    <color name="primary_variant">#4B44CC</color>
+    <color name="secondary_color">#43E6C5</color>
+    <color name="accent_gold">#FFD166</color>
+
+    <!-- Neutrals -->
     <color name="white">#FFFFFFFF</color>
     <color name="black">#FF000000</color>
-    <color name="background">#F5F5F5</color>
-    <color name="surface">#FFFFFF</color>
-    <color name="error">#B00020</color>
-    <color name="text_primary">#212121</color>
-    <color name="text_secondary">#757575</color>
 
-    <!-- Priority Colors -->
-    <color name="priority_high">#E53935</color>
-    <color name="priority_medium">#FB8C00</color>
-    <color name="priority_low">#43A047</color>
+    <!-- Backgrounds -->
+    <color name="background">#F4F3FF</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="surface_variant">#EEEEFF</color>
+
+    <!-- Text -->
+    <color name="text_primary">#1A1A2E</color>
+    <color name="text_secondary">#6B6B8A</color>
+    <color name="text_on_primary">#FFFFFF</color>
+
+    <!-- Status -->
+    <color name="error">#E53935</color>
+    <color name="success">#2ECC71</color>
+
+    <!-- Priority -->
+    <color name="priority_high">#FF4757</color>
+    <color name="priority_high_bg">#FFF0F0</color>
+    <color name="priority_medium">#FFA502</color>
+    <color name="priority_medium_bg">#FFF8EE</color>
+    <color name="priority_low">#2ED573</color>
+    <color name="priority_low_bg">#EDFFF5</color>
 </resources>
