@@ -45,54 +45,45 @@
             android:paddingEnd="20dp"
             android:paddingBottom="100dp">
 
-            <!-- Title input — Filled style, minimal border -->
+            <!-- Title input — OutlinedBox so hint floats above when typing -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/title_input_layout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/enter_title"
-                app:boxBackgroundColor="@color/surface"
                 app:boxCornerRadiusTopStart="12dp"
                 app:boxCornerRadiusTopEnd="12dp"
-                app:boxCornerRadiusBottomStart="0dp"
-                app:boxCornerRadiusBottomEnd="0dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusBottomEnd="12dp"
                 app:boxStrokeColor="@color/primary"
-                app:hintTextColor="@color/primary"
-                app:startIconDrawable="@drawable/ic_add"
-                app:startIconTint="@color/primary">
+                app:boxStrokeWidth="1.5dp"
+                app:hintTextColor="@color/primary">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edit_text_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textCapSentences"
-                    android:paddingTop="8dp"
-                    android:paddingBottom="8dp"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:textColor="@color/text_primary" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Divider line between fields -->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/primary_light" />
-
-            <!-- Description input — Filled style, connected below title -->
+            <!-- Description input — OutlinedBox with floating hint -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/description_input_layout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:hint="@string/enter_description"
-                app:boxBackgroundColor="@color/surface"
-                app:boxCornerRadiusTopStart="0dp"
-                app:boxCornerRadiusTopEnd="0dp"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
                 app:boxCornerRadiusBottomStart="12dp"
                 app:boxCornerRadiusBottomEnd="12dp"
                 app:boxStrokeColor="@color/primary"
+                app:boxStrokeWidth="1.5dp"
                 app:hintTextColor="@color/primary">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -102,8 +93,6 @@
                     android:gravity="top|start"
                     android:inputType="textMultiLine|textCapSentences"
                     android:minLines="6"
-                    android:paddingTop="8dp"
-                    android:paddingBottom="8dp"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                     android:textColor="@color/text_primary" />
 
@@ -147,6 +136,7 @@
                     android:orientation="vertical"
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp">
+
                     <NumberPicker
                         android:id="@+id/number_picker_priority"
                         android:layout_width="wrap_content"
